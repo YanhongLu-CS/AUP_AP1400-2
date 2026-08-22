@@ -3,8 +3,9 @@
 #include "gmock/gmock.h"
 #include "server.h"
 #include "client.h"
+#include "crypto.h"
 
-/*
+
 TEST(HW1Test, TEST1) {
     Server server{};
     auto bryan{server.add_client("bryan")};
@@ -146,7 +147,43 @@ TEST(HW1Test, TEST15) {
     EXPECT_TRUE(clint->get_wallet()==3.5 ||clint->get_wallet()==3.5 ||clint->get_wallet()==9.75);
     EXPECT_TRUE(sarah->get_wallet()==13.25 || sarah->get_wallet()==7 || sarah->get_wallet()==7);
 }
+/**/
+
+
+/*
+TEST1 到 TEST7
+- Server::add_client
+- Server::get_client
+- Server::get_wallet
+- Client constructor
+- Client::get_id
+- Client::get_publickey
+
+TEST8
+- show_wallets
+- friend void show_wallets(...)
+
+TEST9
+- Client::sign
+- 注意测试里要能看到 crypto::verifySignature
+
+TEST10 和 TEST11
+- Server::parse_trx
+- 正确格式能解析
+- 错误格式 throw std::runtime_error
+
+TEST12 和 TEST13
+- Client::transfer_money
+- Server::add_pending_trx
+- 不存在 receiver 返回 false
+- 钱不够返回 false
+
+TEST14
+- pending_trxs
+- 成功 transfer 后加入 pending transaction
+
+TEST15
+- generate_nonce
+- mine
+- mining 成功后更新钱包、清空 pending、奖励 miner
 */
-
-
-
