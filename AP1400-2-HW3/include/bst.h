@@ -48,6 +48,8 @@ public:
         friend std::ostream& operator<<(std::ostream& os, const Node& node);
         //std::out << ... == operator<<(std::cout, ...)
     };
+    BST(std::initializer_list<int> values);
+    BST(const BST& bst);
     Node*& get_root();
     void bfs(std::function<void(Node*& node)> func) const;
     size_t length() const;
@@ -56,6 +58,8 @@ public:
     Node** find_parrent(int value);
     Node** find_successor(int value);
     bool delete_node(int value);
+    BST& operator++();
+    BST operator++(int);
 
     friend std::ostream& operator<<(std::ostream& os, const BST& bst);
     //friend can visit private data of the class
