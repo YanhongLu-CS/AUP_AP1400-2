@@ -50,6 +50,8 @@ public:
     };
     BST(std::initializer_list<int> values);
     BST(const BST& bst);
+    BST(BST&& other) noexcept;
+    ~BST();
     Node*& get_root();
     void bfs(std::function<void(Node*& node)> func) const;
     size_t length() const;
@@ -60,6 +62,8 @@ public:
     bool delete_node(int value);
     BST& operator++();
     BST operator++(int);
+    BST& operator=(const BST& other);
+    BST& operator=(BST&& other) noexcept;
 
     friend std::ostream& operator<<(std::ostream& os, const BST& bst);
     //friend can visit private data of the class

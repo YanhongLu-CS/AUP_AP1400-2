@@ -383,3 +383,39 @@ BST::BST(const BST& other)
 {
     other.bfs([this](Node*& node){this->add_node(node->value);});
 }
+
+BST::BST(BST&& other) noexcept
+    : root(other.root)
+{
+    other.root = nullptr;
+}
+
+BST::~BST()
+{
+    std::vector<Node*> nodes;
+    bfs([&nodes](BST::Node*& node){nodes.push_back(node);});
+    for(auto& node: nodes)
+    delete node;
+}
+
+
+BST& BST::operator=(const BST& other) {
+    if (this == &other) {
+        return *this;
+    } else {
+        BST Temp(other);
+        std::swap(this->root, Temp.root);
+        return *this;
+    }
+}
+
+BST& BST::operator=(BST&& other) noexcept
+{
+    if (this == &other)
+        return *this;
+
+    BST temp(std::move(other));
+    std::swap(this->root, temp.root);
+
+    return *this;
+}
